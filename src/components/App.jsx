@@ -12,7 +12,7 @@ export const App = () => {
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState('');
   const [data, setData] = useState([]);
-  const [totalHits, setTotalHits] = useState(null);
+  const [totalHits, setTotalHits] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [objectModal, setObjectModal] = useState({});
   const [loading, setLoading] = useState(false);
@@ -21,9 +21,8 @@ export const App = () => {
     if (query === '') return;
     setLoading(true);
     const dataRequest = async () => {
+      const data = await api(query, page);
       try {
-        const data = await api(query, page);
-
         setData(prev => [...prev, ...data.hits]);
         setLoading(false);
         setTotalHits(data.totalHits);
