@@ -19,10 +19,10 @@ export const App = () => {
 
   useEffect(() => {
     if (query === '') return;
-    setLoading(true);
     const dataRequest = async () => {
-      const data = await api(query, page);
       try {
+        setLoading(true);
+        const data = await api(query, page);
         setData(prev => [...prev, ...data.hits]);
         setLoading(false);
         setTotalHits(data.totalHits);
